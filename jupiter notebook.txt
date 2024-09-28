@@ -1,0 +1,97 @@
+
+task4_complete.py
+Your file will expire in 24 hours unless you sign up.
+Add a CTAUpgrade
+
+Button Type
+Button text
+Button link (URL)
+Button color
+#1891ed
+
+Text color
+#ffffff
+
+Button location
+Button style
+Only show at end of video 
+ 
+Choose ThumbnailUpgrade
+
+Static
+Animation
+ 
+
+Trim your video by dragging the handles and using the Split button.
+
+View help article
+ Edit Captions
+
+ Engagement Insights
+
+Video Views
+0
+Video Downloads
+0
+Call-to-Action Clicks 
+0
+Average Completion Rate 
+0%
+viewers
+
+
+Someone from Pakistan desktop
+Apr 14, 2021
+
+Someone from Pakistan desktop
+Apr 14, 2021
+
+Someone from Pakistan desktop
+Apr 14, 2021
+ Transcription
+
+Engagement Insights
+
+Analytics
+
+Find out who viewed and downloaded
+your file, when, and from where.
+0 Comments
+
+Leave a comment
+class RolesCache:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.roles = {}
+        self._lru = {}
+        self._tick = 0
+
+    def get(self, role):
+        if role in self.roles:
+            self._lru[role] = self._tick
+            self._tick += 1
+            return self.roles[role]
+        return -1
+
+    def set(self, role, message):
+        if role not in self.roles and len(self.roles) >= self.capacity:
+            cur_oldest_role = None
+            cur_oldest_tick = float('inf')
+            roles = self.roles.keys()
+            for r in roles:
+                if self._lru[r] < cur_oldest_tick:
+                    cur_oldest_role = r
+                    cur_oldest_tick = self._lru[r]
+            self.roles.pop(cur_oldest_role)
+            self._lru.pop(cur_oldest_role)
+        self.roles[role] = message
+        self._lru[role] = self._tick
+        self._tick += 1
+
+    def _complexity(self):
+        return {
+            'get': 'O(1)',
+            'set': 'O(N)', # optimal solution is O(1)
+            'space': 'O(N)'
+        }
+No file chosenNo file chosen
